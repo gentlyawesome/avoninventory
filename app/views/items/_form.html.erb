@@ -19,6 +19,10 @@
     <%= f.label :quantity %><br>
     <%= f.number_field :quantity, :class => "form-control" %>
   </div>
+  <div class="field">
+    <%= f.label :price %><br>
+    <%= f.number_field :price, :class => "form-control", :step => 'any' %>
+  </div>
   <div class="actions">
     <%= f.hidden_field :user_id, :value => current_user.id %>
     <%= f.submit "Submit", :class => "btn btn-success btn-lg"%>
