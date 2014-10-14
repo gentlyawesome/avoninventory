@@ -1,34 +1,41 @@
-<h1>Listing items</h1>
+<div class="row">
+<div class="col-md-8">
+<%= render 'list_items' %>
+</div>
 
-<table class="table table-bordered table-striped">
-  <thead>
-    <tr>
-      <th>Description</th>
-      <th>Quantity</th>
-      <th>Borchure Price</th>
-      <th>Total</th>
-      <th>Discount</th>
-      <th>Amount</th>
-      <th colspan="2"></th>
-    </tr>
-  </thead>
+<div class="col-md-4">
+<h1>Add Item</h1>
+<%= form_for(@item) do |f| %>
+  <% if @item.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@item.errors.count, "error") %> prohibited this item from being saved:</h2>
 
-  <tbody>
-    <% @items.each do |item| %>
-      <tr>
-        <td><%= item.description %></td>
-        <td><%= item.quantity %></td>
-        <td><%= item.price %></td>
-        <td><%= item.total %></td>
-        <td><%= item.discount %></td>
-        <td><%= item.amount %></td>
-        <td><%= link_to 'Edit', edit_item_path(item) %></td>
-        <td><%= link_to 'Destroy', item, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+      <ul>
+      <% @item.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
 
-<br>
+  <div class="field">
+    <%= f.label :description %><br>
+    <%= f.text_area :description, :class => "form-control" %>
+  </div>
+  <div class="field">
+    <%= f.label :quantity %><br>
+    <%= f.number_field :quantity, :class => "form-control input-lg" %>
+  </div>
+  <div class="field">
+    <%= f.label :price %><br>
+    <%= f.number_field :price, :class => "form-control input-lg", :step => 'any' %>
+  </div>
+  <div class="actions">
+    <%= f.hidden_field :user_id, :value => current_user.id %>
+    <%= f.submit "Submit", :class => "btn btn-success btn-lg btn-block"%>
+  </div>
+<% end %>
+</div>
+</div>
 
-<%= link_to 'New Item', new_item_path, :class => "btn btn-success btn-lg" %>
+

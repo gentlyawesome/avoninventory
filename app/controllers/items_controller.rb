@@ -4,6 +4,7 @@ class ItemsController < ApplicationController
 
   def index
     @items = current_user.items
+    @item = Item.new
     respond_with(@items)
   end
 
@@ -12,11 +13,13 @@ class ItemsController < ApplicationController
   end
 
   def new
+    @items = current_user.items
     @item = Item.new
     respond_with(@item)
   end
 
   def edit
+    @items = current_user.items
   end
 
   def create
